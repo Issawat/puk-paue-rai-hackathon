@@ -20,7 +20,7 @@ export const TimelineDots = () => {
               key={index}
               color={colorMap[value]}
               dotSize={20}
-              opacity={index / mockData.length}
+              opacity={0.1 + index / mockData.length}
             />
           );
         }
@@ -34,12 +34,12 @@ export const TimelineDots = () => {
             <Dot
               color={colorMap[value]}
               dotSize={20}
-              opacity={index / mockData.length}
+              opacity={0.1 + index / mockData.length}
             />
             <Line
               color={colorMap[value]}
               width="calc(100% - 20px)"
-              opacity={index / mockData.length}
+              opacity={0.1 + index / mockData.length}
             />
           </Group>
         );
