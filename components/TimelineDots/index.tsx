@@ -1,4 +1,4 @@
-import { Box, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 import { Dot } from "./Dot";
 import { Line } from "./Line";
 
@@ -12,7 +12,7 @@ const colorMap: Record<string, string> = {
 
 export const TimelineDots = () => {
   return (
-    <Group spacing="0" w="100%">
+    <Group spacing="0" position="apart" w="100%">
       {mockData.map((value, index) => {
         if (index === mockData.length - 1) {
           return (
@@ -29,7 +29,7 @@ export const TimelineDots = () => {
             key={index}
             spacing="0"
             position="apart"
-            w={`${100 / mockData.length}%`}
+            w={`calc(${100 / (mockData.length-1)}% - 5px)`}
           >
             <Dot
               color={colorMap[value]}
