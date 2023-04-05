@@ -1,12 +1,14 @@
 import { Box, Popover } from "@mantine/core";
+import { ReactNode } from "react";
 
 type DotProps = {
   dotSize: number;
   color: string;
   opacity?: number;
+  tooltip?: ReactNode;
 };
 
-export const Dot = ({ dotSize, color, opacity = 1 }: DotProps) => {
+export const Dot = ({ dotSize, color, opacity = 1, tooltip }: DotProps) => {
   return (
     <Popover width={200} position="bottom" withArrow shadow="md">
       <Popover.Target>
@@ -21,9 +23,7 @@ export const Dot = ({ dotSize, color, opacity = 1 }: DotProps) => {
           }}
         />
       </Popover.Target>
-      <Popover.Dropdown>
-        This is uncontrolled popover, it is opened when button is clicked
-      </Popover.Dropdown>
+      <Popover.Dropdown>{tooltip ?? "Tooltip area"}</Popover.Dropdown>
     </Popover>
   );
 };

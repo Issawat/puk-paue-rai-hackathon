@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "period": "Q1, 2022",
+      "revenueHightLight": {
+        "highlight": "New financial records, including revenue, gross margins, operating margin, and bottom line profitability",
+        "side": "positive"
+      },
+      "profitability": {
+        "gaapAutomotiveGrossMargin": 32.9,
+        "operationMargin": 19,
+        "side": "positive"
+      },
+      "productUpdates": [
+        {
+          "product": "Model Y",
+          "description": "A more profitable electric vehicle in Tesla's lineup",
+          "status": "complete",
+          "keywords": ["Tesla", "Model Y", "EV"]
+        }
+      ],
+      "upcomingProductLaunches": [
+        {
+          "product": "Dedicated Robotaxi",
+          "description": "A vehicle optimized for autonomy, without steering wheel or pedals, aiming for the lowest cost per mile",
+          "status": "in-progress",
+          "keywords": ["Tesla", "Robotaxi", "Autonomy"]
+        },
+        {
+          "product": "Cybertruck",
+          "description": "An electric pickup truck with a unique design and advanced features",
+          "status": "in-progress",
+          "keywords": ["Tesla", "Cybertruck", "EV"]
+        },
+        {
+          "product": "Optimus Robot",
+          "description": "A humanoid robot designed for various tasks and applications",
+          "status": "in-progress",
+          "keywords": ["Tesla", "Optimus", "Robot"]
+        }
+      ]
+    },
+    {
+      "period": "Q2, 2022",
+      "revenueHightLight": {
+        "highlight": "Q2 2022 was one of the strongest quarters in Tesla's history despite a prolonged shutdown of the Shanghai factory.",
+        "side": "positive"
+      },
+      "profitability": {
+        "gaapAutomotiveGrossMargin": 27.9,
+        "operationMargin": 14.6,
+        "side": "positive"
+      },
+      "productUpdates": [
+        {
+          "product": "Model Y",
+          "description": "An electric compact crossover utility vehicle (CUV) by Tesla.",
+          "status": "in-progress",
+          "keywords": ["Model Y", "Tesla", "CUV"]
+        },
+        {
+          "product": "Autopilot",
+          "description": "Tesla's advanced driver-assistance system with Full Self-Driving (FSD) capabilities.",
+          "status": "in-progress",
+          "keywords": ["Autopilot", "Tesla", "FSD"]
+        }
+      ],
+      "upcomingProductLaunches": [
+        {
+          "product": "Cybertruck",
+          "description": "An all-electric light commercial vehicle with a unique design.",
+          "status": "in-progress",
+          "keywords": ["Cybertruck", "Tesla", "electric"]
+        },
+        {
+          "product": "4680 Battery Cells",
+          "description": "New battery cells with improved energy density and manufacturing efficiency.",
+          "status": "in-progress",
+          "keywords": ["4680", "Tesla", "battery"]
+        }
+      ]
+    }
+  ]
+}
