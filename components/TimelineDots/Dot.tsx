@@ -10,7 +10,7 @@ type DotProps = {
 
 export const Dot = ({ dotSize, color, opacity = 1, tooltip }: DotProps) => {
   return (
-    <Popover width={200} position="bottom" withArrow shadow="md">
+    <Popover width={300} position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Box
           w={`${dotSize}px`}

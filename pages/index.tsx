@@ -38,14 +38,14 @@ const productTimelineTranformer =
     let alpha = DEFAULT_ALPHA;
     const timelineData: TimelineDataPropItem[] =
       data.map((item) => {
-        const hasProduct =
-          !!item.currentProductsUpdate?.find(
+        const product =
+          item.currentProductsUpdate?.find(
             (product) => product.product === productTarget
           ) ||
-          !!item.upcomingProductLaunches?.find(
+          item.upcomingProductLaunches?.find(
             (product) => product.product === productTarget
           );
-        if (hasProduct) {
+        if (!!product) {
           if (alpha < MAX_ALPHA) {
             alpha += ALPHA_STEP;
           }
@@ -53,6 +53,19 @@ const productTimelineTranformer =
           return {
             side: "neutral",
             nodeOpacity: alpha,
+            tooltip: (
+              <Box>
+                <Text size="md" weight="bold">
+                  {product.product}
+                </Text>
+                <Text size="md">Description: {product.description}</Text>
+                <Text size="md">
+                  Related keywords:{" "}
+                  {product.keywords.map((keyword) => `, ${keyword}`)}
+                </Text>
+                <Text size="md">Status: {product.status}</Text>
+              </Box>
+            ),
           };
         } else {
           alpha = DEFAULT_ALPHA;
