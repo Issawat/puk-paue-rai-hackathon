@@ -1,8 +1,4 @@
-import {
-  TimelineDataPropItem,
-  TimelineDataProps,
-  TimelineDots,
-} from "@/components/TimelineDots";
+import { TimelineDataPropItem, TimelineDots } from "@/components/TimelineDots";
 import { Inter } from "next/font/google";
 import {
   Chart,
@@ -14,8 +10,10 @@ import {
   CategoryScale,
 } from "chart.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Box, Container, Header, Text } from "@mantine/core";
+import { Box, Container, Header, Tabs, Text } from "@mantine/core";
 import { TimlineData } from "@/types/timelineData";
+import { StockData } from "@/types/stockData";
+import dayjs from "dayjs";
 
 Chart.register(
   LineController,
@@ -28,27 +26,69 @@ Chart.register(
 
 const inter = Inter({ subsets: ["latin"] });
 
+const DEFAULT_ALPHA = 0;
+const ALPHA_STEP = 0.25;
+const MAX_ALPHA = 1;
+const productTimelineTranformer =
+  (data: TimlineData[]) =>
+  (productTarget: string): TimelineDataPropItem[] => {
+    let alpha = DEFAULT_ALPHA;
+    const timelineData: TimelineDataPropItem[] =
+      data.map((item) => {
+        const hasProduct = !!item.productUpdates.find(
+          (product) => product.product === productTarget
+        );
+        if (hasProduct) {
+          if (alpha < MAX_ALPHA) {
+            alpha += ALPHA_STEP;
+          }
+
+          return {
+            side: "nuetral",
+            nodeOpacity: alpha,
+          };
+        } else {
+          alpha = DEFAULT_ALPHA;
+          return {
+            side: "nuetral",
+            nodeOpacity: alpha,
+          };
+        }
+      }) ?? [];
+    return timelineData;
+  };
+
 export default function Home() {
   const ref = useRef<HTMLCanvasElement>(null);
   const [data, setData] = useState<TimlineData[]>();
 
   useEffect(() => {
-    const canvasContext = ref?.current?.getContext("2d");
-    if (canvasContext) {
-      new Chart(canvasContext, {
-        type: "line",
-        data: {
-          datasets: [
-            {
-              label: "hello",
-              data: [65, 59, 80, 81, 56, 55, 40],
-              fill: true,
-              tension: 0.1,
-            },
-          ],
-        },
-      });
-    }
+    const f = async () => {
+      const res = await fetch(`/data/stock.json`);
+      const resData = await res.json();
+      const stockTimeline = resData.results as StockData[];
+      const stockPrices = stockTimeline.map((stock) => stock.value);
+      const stockDates = stockTimeline.map((stock) =>
+        dayjs(stock.date).format("MM/YY")
+      );
+      const canvasContext = ref?.current?.getContext("2d");
+      if (canvasContext) {
+        new Chart(canvasContext, {
+          type: "line",
+          data: {
+            labels: stockDates,
+            datasets: [
+              {
+                data: stockPrices,
+                borderColor: "#3cba9f",
+                tension: 0.1,
+              },
+            ],
+          },
+        });
+      }
+    };
+    f();
   }, []);
 
   useEffect(() => {
@@ -103,18 +143,66 @@ export default function Home() {
     [data]
   );
 
+  const productSet = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          data?.flatMap((item) =>
+            item.productUpdates.map((update) => update.product)
+          )
+        )
+      ),
+    [data]
+  );
+
+  const productTimelines = useMemo(
+    () =>
+      productSet.map((product) => ({
+        product,
+        timeline: productTimelineTranformer(data || [])(product),
+      })),
+    [data, productSet]
+  );
+
+  console.debug({ productTimelines });
+
   return (
-    <Container style={{ width: "100vw", ...inter.style }}>
+    <Container style={{ width: "100vw", padding: 0, ...inter.style }}>
       <Text my={4} weight="bold" variant="gradient" size="xl" align="center">
         TSLA (Tesla)
       </Text>
-      <Box my={4} w="99%">
+      <Box mt={4} pb={10} w="99%">
         <canvas ref={ref} />
       </Box>
-      <Text my={4}>Revenue Highlights</Text>
-      <TimelineDots keyPrefix="revenueHightlights" items={revenueHightlights} />
-      <Text my={4}>Profitability</Text>
-      <TimelineDots keyPrefix="profitability" items={profitabilities} />
+      <Tabs variant="pills" defaultValue="fundamental" radius="xl">
+        <Tabs.List>
+          <Tabs.Tab value="fundamental">Fundamental</Tabs.Tab>
+          <Tabs.Tab value="drilldown">Drilldown</Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="fundamental" py="lg">
+          <Text my={4}>Revenue Highlights</Text>
+          <TimelineDots
+            keyPrefix="revenueHightlights"
+            items={revenueHightlights}
+          />
+          <Text my={4}>Profitability</Text>
+          <TimelineDots keyPrefix="profitability" items={profitabilities} />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="drilldown" py="lg">
+          {productTimelines.map((product, index) => (
+            <Box key={`product-${product.product}-${index}`}>
+              <Text my={4}>{product.product}</Text>
+              <TimelineDots
+                keyPrefix="profitability"
+                items={product.timeline}
+                fixedColor="#0083e0"
+              />
+            </Box>
+          ))}
+        </Tabs.Panel>
+      </Tabs>
     </Container>
   );
 }
