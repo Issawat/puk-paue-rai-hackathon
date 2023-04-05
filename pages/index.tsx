@@ -10,7 +10,7 @@ import {
   CategoryScale,
 } from "chart.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Box, Container, Header, Tabs, Text } from "@mantine/core";
+import { Box, Tabs, Text } from "@mantine/core";
 import { TimlineData } from "@/types/timelineData";
 import { StockData } from "@/types/stockData";
 import dayjs from "dayjs";
@@ -67,7 +67,9 @@ export default function Home() {
       const res = await fetch(`/data/stock.json`);
       const resData = await res.json();
       const stockTimeline = resData.results as StockData[];
-      const stockPrices = stockTimeline.map((stock) => stock.value);
+      const closePrices = stockTimeline.map((stock) => stock.close);
+      // const highPrices = stockTimeline.map((stock) => stock.high);
+      // const lowPrices = stockTimeline.map((stock) => stock.low);
       const stockDates = stockTimeline.map((stock) =>
         dayjs(stock.date).format("MM/YY")
       );
@@ -75,14 +77,38 @@ export default function Home() {
       if (canvasContext) {
         new Chart(canvasContext, {
           type: "line",
+          options: {
+            responsive: false,
+            elements: {
+              point: {
+                radius: 0,
+              },
+            },
+          },
           data: {
             labels: stockDates,
             datasets: [
               {
-                data: stockPrices,
-                borderColor: "#3cba9f",
+                data: closePrices,
+                label: "Close",
+                borderColor: "#0083e0",
                 tension: 0.1,
+                cubicInterpolationMode: "monotone",
               },
+              // {
+              //   data: highPrices,
+              //   label: "High",
+              //   borderColor: "#98d900",
+              //   tension: 0.1,
+              //   cubicInterpolationMode: "monotone",
+              // },
+              // {
+              //   data: lowPrices,
+              //   label: "Low",
+              //   borderColor: "#ff4e08",
+              //   tension: 0.1,
+              //   cubicInterpolationMode: "monotone",
+              // },
             ],
           },
         });
@@ -167,42 +193,50 @@ export default function Home() {
   console.debug({ productTimelines });
 
   return (
-    <Container style={{ width: "100vw", padding: 0, ...inter.style }}>
-      <Text my={4} weight="bold" variant="gradient" size="xl" align="center">
+    <Box style={{ width: "100vw", padding: 0, ...inter.style }}>
+      <Text
+        my={4}
+        weight="bold"
+        variant="gradient"
+        align="center"
+        sx={{ fontSize: "50px" }}
+      >
         TSLA (Tesla)
       </Text>
       <Box mt={4} pb={10} w="99%">
-        <canvas ref={ref} />
+        <canvas ref={ref} style={{ width: "100%", height: "500px" }} />
       </Box>
-      <Tabs variant="pills" defaultValue="fundamental" radius="xl">
-        <Tabs.List>
-          <Tabs.Tab value="fundamental">Fundamental</Tabs.Tab>
-          <Tabs.Tab value="drilldown">Drilldown</Tabs.Tab>
-        </Tabs.List>
+      <Box w="100%" pl={10}>
+        <Tabs variant="pills" defaultValue="fundamental" radius="xl">
+          <Tabs.List>
+            <Tabs.Tab value="fundamental">Fundamental</Tabs.Tab>
+            <Tabs.Tab value="drilldown">Drilldown</Tabs.Tab>
+          </Tabs.List>
 
-        <Tabs.Panel value="fundamental" py="lg">
-          <Text my={4}>Revenue Highlights</Text>
-          <TimelineDots
-            keyPrefix="revenueHightlights"
-            items={revenueHightlights}
-          />
-          <Text my={4}>Profitability</Text>
-          <TimelineDots keyPrefix="profitability" items={profitabilities} />
-        </Tabs.Panel>
+          <Tabs.Panel value="fundamental" py="lg">
+            <Text my={4}>Revenue Highlights</Text>
+            <TimelineDots
+              keyPrefix="revenueHightlights"
+              items={revenueHightlights}
+            />
+            <Text my={4}>Profitability</Text>
+            <TimelineDots keyPrefix="profitability" items={profitabilities} />
+          </Tabs.Panel>
 
-        <Tabs.Panel value="drilldown" py="lg">
-          {productTimelines.map((product, index) => (
-            <Box key={`product-${product.product}-${index}`}>
-              <Text my={4}>{product.product}</Text>
-              <TimelineDots
-                keyPrefix="profitability"
-                items={product.timeline}
-                fixedColor="#0083e0"
-              />
-            </Box>
-          ))}
-        </Tabs.Panel>
-      </Tabs>
-    </Container>
+          <Tabs.Panel value="drilldown" py="lg">
+            {productTimelines.map((product, index) => (
+              <Box key={`product-${product.product}-${index}`}>
+                <Text my={4}>{product.product}</Text>
+                <TimelineDots
+                  keyPrefix="profitability"
+                  items={product.timeline}
+                  fixedColor="#0083e0"
+                />
+              </Box>
+            ))}
+          </Tabs.Panel>
+        </Tabs>
+      </Box>
+    </Box>
   );
 }

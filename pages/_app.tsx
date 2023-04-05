@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, useMantineTheme } from "@mantine/core";
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -20,6 +20,11 @@ export default function App(props: AppProps) {
         withNormalizeCSS
         theme={{
           colorScheme: "light",
+          defaultGradient: {
+            from: "red",
+            to: "blue",
+            deg: 90,
+          },
         }}
       >
         <Component {...pageProps} />
