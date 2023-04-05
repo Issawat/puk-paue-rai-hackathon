@@ -14,7 +14,7 @@ import {
   CategoryScale,
 } from "chart.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Box, Container, Text } from "@mantine/core";
+import { Box, Container, Header, Text } from "@mantine/core";
 import { TimlineData } from "@/types/timelineData";
 
 Chart.register(
@@ -68,10 +68,10 @@ export default function Home() {
             side: revenueHightLight.side,
             tooltip: (
               <Box>
-                <Text size="xl" weight="bold">
+                <Text size="md" weight="bold">
                   Hightlight
                 </Text>
-                <Text size="xl">{revenueHightLight.highlight}</Text>
+                <Text size="md">{revenueHightLight.highlight}</Text>
               </Box>
             ),
           } as TimelineDataPropItem)
@@ -87,13 +87,13 @@ export default function Home() {
             side: profitablity?.side,
             tooltip: (
               <Box>
-                <Text size="xl" weight="bold">
+                <Text size="md" weight="bold">
                   Profitablity
                 </Text>
-                <Text size="xl">
+                <Text size="md">
                   GAAP Margin: {profitablity?.gaapAutomotiveGrossMargin}
                 </Text>
-                <Text size="xl">
+                <Text size="md">
                   Operation Margin: {profitablity?.operationMargin}
                 </Text>
               </Box>
@@ -105,7 +105,10 @@ export default function Home() {
 
   return (
     <Container style={{ width: "100vw", ...inter.style }}>
-      <Box w="100%" px="100px">
+      <Text my={4} weight="bold" variant="gradient" size="xl" align="center">
+        TSLA (Tesla)
+      </Text>
+      <Box my={4} w="99%">
         <canvas ref={ref} />
       </Box>
       <Text my={4}>Revenue Highlights</Text>
