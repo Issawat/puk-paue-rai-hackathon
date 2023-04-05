@@ -39,12 +39,13 @@ const productTimelineTranformer =
     const timelineData: TimelineDataPropItem[] =
       data.map((item) => {
         const product =
-          item.currentProductsUpdate?.find(
-            (product) => product.product === productTarget
-          ) ||
           item.upcomingProductLaunches?.find(
             (product) => product.product === productTarget
+          ) ||
+          item.currentProductsUpdate?.find(
+            (product) => product.product === productTarget
           );
+
         if (!!product) {
           if (alpha < MAX_ALPHA) {
             alpha += ALPHA_STEP;
