@@ -38,9 +38,13 @@ const productTimelineTranformer =
     let alpha = DEFAULT_ALPHA;
     const timelineData: TimelineDataPropItem[] =
       data.map((item) => {
-        const hasProduct = !!item.currentProductsUpdate.find(
-          (product) => product.product === productTarget
-        );
+        const hasProduct =
+          !!item.currentProductsUpdate?.find(
+            (product) => product.product === productTarget
+          ) ||
+          !!item.upcomingProductLaunches?.find(
+            (product) => product.product === productTarget
+          );
         if (hasProduct) {
           if (alpha < MAX_ALPHA) {
             alpha += ALPHA_STEP;
@@ -176,11 +180,14 @@ export default function Home() {
   const productSet = useMemo(
     () =>
       Array.from(
-        new Set(
-          data?.flatMap((item) =>
-            item.currentProductsUpdate.map((update) => update.product)
-          )
-        )
+        new Set([
+          ...(data?.flatMap((item) =>
+            item.currentProductsUpdate?.map((update) => update.product)
+          ) ?? []),
+          ...(data?.flatMap((item) =>
+            item.upcomingProductLaunches?.map((update) => update.product)
+          ) ?? []),
+        ])
       ),
     [data]
   );
@@ -193,8 +200,6 @@ export default function Home() {
       })),
     [data, productSet]
   );
-
-  console.debug({ productTimelines });
 
   return (
     <Box style={{ width: "100vw", padding: "20px", ...inter.style }}>

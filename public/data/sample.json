@@ -1,69 +1,183 @@
 {
   "data": [
     {
-      "date": "January 25, 2023",
-      "period": "Q4 2022",
+      "period": "Q1, 2022",
       "revenueHighlight": {
-        "value": "Revenue increased over 50%",
+        "value": "New financial records, including revenue, gross margins, operating margin, and bottom line profitability.",
+        "side": "neutral"
+      },
+      "profitability": {
+        "operatingIncome": {
+          "value": "19%",
+          "side": "neutral"
+        },
+        "freeCashFlows": {
+          "value": "Not provided",
+          "side": "neutral"
+        },
+        "margins": {
+          "value": "32.9%",
+          "side": "neutral"
+        }
+      },
+      "currentProductsUpdate": [
+        {
+          "product": "Tesla Model Y",
+          "description": "An electric compact crossover utility vehicle (CUV) with increased profitability.",
+          "status": "complete",
+          "keywords": ["Model Y", "CUV", "electric vehicle"]
+        }
+      ],
+      "upcomingProductsLaunches": [
+        {
+          "product": "Tesla Dedicated Robotaxi",
+          "description": "A vehicle optimized for autonomy, without steering wheel or pedals, and focused on achieving the lowest cost per mile.",
+          "status": "in-progress",
+          "keywords": ["robotaxi", "autonomy", "low cost"]
+        },
+        {
+          "product": "Tesla Cybertruck",
+          "description": "An all-electric light commercial vehicle with a stainless steel exoskeleton and innovative design.",
+          "status": "in-progress",
+          "keywords": ["Cybertruck", "electric", "light commercial vehicle"]
+        },
+        {
+          "product": "Tesla Optimus",
+          "description": "A humanoid robot designed to perform tasks that are unsafe or difficult for humans.",
+          "status": "in-progress",
+          "keywords": ["Optimus", "humanoid robot", "tasks"]
+        }
+      ]
+    },
+    {
+      "period": "Q2, 2022",
+      "revenueHighlight": {
+        "value": "Q2 was one of the strongest quarters in Tesla's history despite challenges like the prolonged shutdown of the Shanghai factory.",
         "side": "positive"
       },
       "profitability": {
         "operatingIncome": {
-          "value": "Doubled",
+          "value": "14.6%",
           "side": "negative"
         },
         "freeCashFlows": {
-          "value": "Increased over 50%",
+          "value": "Not provided",
+          "side": "neutral"
+        },
+        "margins": {
+          "value": "27.9%",
           "side": "negative"
-        },
-        "margins": {
-          "value": "Industry-leading",
-          "side": "neutral"
         }
       },
       "currentProductsUpdate": [
         {
-          "product": "Model Y",
-          "description": "A mid-size all-electric crossover SUV with top-tier performance and efficiency.",
+          "product": "Tesla Model S",
+          "description": "An all-electric luxury sedan with advanced performance and range.",
           "status": "in-progress",
-          "keywords": ["Model Y", "Tesla", "SUV"]
+          "keywords": ["Model S", "sedan", "electric"]
         },
         {
-          "product": "Autopilot",
-          "description": "Advanced driver assistance system that offers lane centering, adaptive cruise control, and self-parking.",
+          "product": "Tesla Model 3",
+          "description": "An all-electric compact sedan with impressive range and performance.",
           "status": "in-progress",
-          "keywords": ["Autopilot", "Tesla", "driver assistance"]
+          "keywords": ["Model 3", "sedan", "electric"]
         },
         {
-          "product": "4680 Battery Cell",
-          "description": "A high-energy, low-cost battery cell designed for improved performance and increased range.",
+          "product": "Tesla Model X",
+          "description": "An all-electric luxury SUV with advanced performance and range.",
           "status": "in-progress",
-          "keywords": ["4680", "Tesla", "battery"]
+          "keywords": ["Model X", "SUV", "electric"]
         },
         {
-          "product": "Energy Storage",
-          "description": "Tesla's energy storage solutions include Powerwall, Powerpack, and Megapack for residential and commercial use.",
+          "product": "Tesla Model Y",
+          "description": "An all-electric compact SUV with impressive range and performance.",
           "status": "in-progress",
-          "keywords": ["Energy Storage", "Tesla", "Powerwall"]
+          "keywords": ["Model Y", "SUV", "electric"]
         }
       ],
       "upcomingProductsLaunches": [
         {
-          "product": "Cybertruck",
-          "description": "An all-electric pickup truck with a unique design and impressive performance capabilities.",
+          "product": "Tesla Cybertruck",
+          "description": "An all-electric pickup truck with a unique design and advanced features.",
           "status": "in-progress",
-          "keywords": ["Cybertruck", "Tesla", "pickup"]
+          "keywords": ["Cybertruck", "pickup", "electric"]
         },
         {
-          "product": "Next-Generation Vehicle Platform",
-          "description": "Tesla's upcoming vehicle platform aimed at further improving performance, efficiency, and affordability.",
+          "product": "Tesla Full Self-Driving (FSD) Beta",
+          "description": "An advanced driver-assistance system with autonomous driving capabilities.",
           "status": "in-progress",
-          "keywords": ["Next-Generation", "Tesla", "vehicle platform"]
+          "keywords": ["FSD", "beta", "autonomous"]
         }
       ]
     },
     {
-      "date": "January 25, 2023",
+      "period": "Q3, 2022",
+      "revenueHighlight": {
+        "value": "Record quarter with industry-leading operating margin of 17% and free cash flow surpassing $3 billion in Q3",
+        "side": "positive"
+      },
+      "profitability": {
+        "operatingIncome": {
+          "value": "17.2%",
+          "side": "positive"
+        },
+        "freeCashFlows": {
+          "value": "$3 billion",
+          "side": "positive"
+        },
+        "margins": {
+          "value": "27.9%",
+          "side": "positive"
+        }
+      },
+      "currentProductsUpdate": [
+        {
+          "product": "Tesla Giga Berlin",
+          "description": "Tesla's factory in Germany, producing 2,000 cars a week with high quality and ramping up rapidly",
+          "status": "in-progress",
+          "keywords": ["Giga", "Berlin", "factory"]
+        },
+        {
+          "product": "Tesla Giga Texas",
+          "description": "Tesla's factory in Austin, Texas, nearing the milestone of producing 2,000 cars a week",
+          "status": "in-progress",
+          "keywords": ["Giga", "Texas", "factory"]
+        },
+        {
+          "product": "Tesla 4680 Battery Cells",
+          "description": "Tesla's new battery cells with tripled production in Q3 compared to the previous quarter",
+          "status": "in-progress",
+          "keywords": ["4680", "cells", "battery"]
+        },
+        {
+          "product": "Tesla Fremont Factory",
+          "description": "Tesla's factory in California, reaching record production in Q3 with plans to keep raising production",
+          "status": "in-progress",
+          "keywords": ["Fremont", "factory", "California"]
+        }
+      ],
+      "upcomingProductsLaunches": [
+        {
+          "product": "Tesla Cybertruck",
+          "description": "Tesla's electric pickup truck, currently in the final lap of development",
+          "status": "in-progress",
+          "keywords": ["Cybertruck", "pickup", "electric"]
+        },
+        {
+          "product": "Tesla Optimus Robot",
+          "description": "Tesla's AI-driven robot prototype showcased during AI Day",
+          "status": "in-progress",
+          "keywords": ["Optimus", "robot", "AI"]
+        },
+        {
+          "product": "Full Self-Driving Beta",
+          "description": "Tesla's autonomous driving software, expected to go into wide release in North America within a month",
+          "status": "in-progress",
+          "keywords": ["FSD", "Beta", "self-driving"]
+        }
+      ]
+    },
+    {
       "period": "Q4 2022",
       "revenueHighlight": {
         "value": "Revenue increased over 50%",
@@ -85,25 +199,25 @@
       },
       "currentProductsUpdate": [
         {
-          "product": "Model Y",
+          "product": "Tesla Model Y",
           "description": "A mid-size all-electric crossover SUV with top-tier performance and efficiency.",
           "status": "in-progress",
           "keywords": ["Model Y", "Tesla", "SUV"]
         },
         {
-          "product": "Autopilot",
+          "product": "Tesla Autopilot",
           "description": "Advanced driver assistance system that offers lane centering, adaptive cruise control, and self-parking.",
           "status": "in-progress",
           "keywords": ["Autopilot", "Tesla", "driver assistance"]
         },
         {
-          "product": "4680 Battery Cell",
+          "product": "Tesla 4680 Battery Cells",
           "description": "A high-energy, low-cost battery cell designed for improved performance and increased range.",
           "status": "in-progress",
           "keywords": ["4680", "Tesla", "battery"]
         },
         {
-          "product": "Energy Storage",
+          "product": "Tesla Energy Storage",
           "description": "Tesla's energy storage solutions include Powerwall, Powerpack, and Megapack for residential and commercial use.",
           "status": "in-progress",
           "keywords": ["Energy Storage", "Tesla", "Powerwall"]
@@ -111,125 +225,13 @@
       ],
       "upcomingProductsLaunches": [
         {
-          "product": "Cybertruck",
+          "product": "Tesla Cybertruck",
           "description": "An all-electric pickup truck with a unique design and impressive performance capabilities.",
           "status": "in-progress",
           "keywords": ["Cybertruck", "Tesla", "pickup"]
         },
         {
-          "product": "Next-Generation Vehicle Platform",
-          "description": "Tesla's upcoming vehicle platform aimed at further improving performance, efficiency, and affordability.",
-          "status": "in-progress",
-          "keywords": ["Next-Generation", "Tesla", "vehicle platform"]
-        }
-      ]
-    },
-    {
-      "date": "January 25, 2023",
-      "period": "Q4 2022",
-      "revenueHighlight": {
-        "value": "Revenue increased over 50%",
-        "side": "positive"
-      },
-      "profitability": {
-        "operatingIncome": {
-          "value": "Doubled",
-          "side": "positive"
-        },
-        "freeCashFlows": {
-          "value": "Increased over 50%",
-          "side": "positive"
-        },
-        "margins": {
-          "value": "Industry-leading",
-          "side": "neutral"
-        }
-      },
-      "currentProductsUpdate": [
-        {
-          "product": "Model Y",
-          "description": "A mid-size all-electric crossover SUV with top-tier performance and efficiency.",
-          "status": "in-progress",
-          "keywords": ["Model Y", "Tesla", "SUV"]
-        },
-        {
-          "product": "Autopilot",
-          "description": "Advanced driver assistance system that offers lane centering, adaptive cruise control, and self-parking.",
-          "status": "in-progress",
-          "keywords": ["Autopilot", "Tesla", "driver assistance"]
-        },
-        {
-          "product": "Energy Storage",
-          "description": "Tesla's energy storage solutions include Powerwall, Powerpack, and Megapack for residential and commercial use.",
-          "status": "in-progress",
-          "keywords": ["Energy Storage", "Tesla", "Powerwall"]
-        }
-      ],
-      "upcomingProductsLaunches": [
-        {
-          "product": "Cybertruck",
-          "description": "An all-electric pickup truck with a unique design and impressive performance capabilities.",
-          "status": "in-progress",
-          "keywords": ["Cybertruck", "Tesla", "pickup"]
-        },
-        {
-          "product": "Next-Generation Vehicle Platform",
-          "description": "Tesla's upcoming vehicle platform aimed at further improving performance, efficiency, and affordability.",
-          "status": "in-progress",
-          "keywords": ["Next-Generation", "Tesla", "vehicle platform"]
-        }
-      ]
-    },
-    {
-      "date": "January 25, 2023",
-      "period": "Q4 2022",
-      "revenueHighlight": {
-        "value": "Revenue increased over 50%",
-        "side": "positive"
-      },
-      "profitability": {
-        "operatingIncome": {
-          "value": "Doubled",
-          "side": "neutral"
-        },
-        "freeCashFlows": {
-          "value": "Increased over 50%",
-          "side": "neutral"
-        },
-        "margins": {
-          "value": "Industry-leading",
-          "side": "neutral"
-        }
-      },
-      "currentProductsUpdate": [
-        {
-          "product": "Model Y",
-          "description": "A mid-size all-electric crossover SUV with top-tier performance and efficiency.",
-          "status": "in-progress",
-          "keywords": ["Model Y", "Tesla", "SUV"]
-        },
-        {
-          "product": "Autopilot",
-          "description": "Advanced driver assistance system that offers lane centering, adaptive cruise control, and self-parking.",
-          "status": "in-progress",
-          "keywords": ["Autopilot", "Tesla", "driver assistance"]
-        },
-        {
-          "product": "4680 Battery Cell",
-          "description": "A high-energy, low-cost battery cell designed for improved performance and increased range.",
-          "status": "in-progress",
-          "keywords": ["4680", "Tesla", "battery"]
-        }
-      ],
-      "upcomingProductsLaunches": [
-        {
-          "product": "Cybertruck",
-          "description": "An all-electric pickup truck with a unique design and impressive performance capabilities.",
-          "status": "in-progress",
-          "keywords": ["Cybertruck", "Tesla", "pickup"]
-        },
-        {
-          "product": "Next-Generation Vehicle Platform",
+          "product": "Tesla Next-Generation Vehicle Platform",
           "description": "Tesla's upcoming vehicle platform aimed at further improving performance, efficiency, and affordability.",
           "status": "in-progress",
           "keywords": ["Next-Generation", "Tesla", "vehicle platform"]
