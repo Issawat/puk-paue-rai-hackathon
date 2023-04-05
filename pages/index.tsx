@@ -8,12 +8,14 @@ import {
   LinearScale,
   Title,
   CategoryScale,
+  TimeScale,
 } from "chart.js";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Box, Tabs, Text } from "@mantine/core";
-import { TimlineData } from "@/types/timelineData";
+import { SentimentSide, TimlineData } from "@/types/timelineData";
 import { StockData } from "@/types/stockData";
 import dayjs from "dayjs";
+import "chartjs-adapter-dayjs-4/dist/chartjs-adapter-dayjs-4.esm";
 
 Chart.register(
   LineController,
@@ -21,7 +23,8 @@ Chart.register(
   PointElement,
   LinearScale,
   Title,
-  CategoryScale
+  CategoryScale,
+  TimeScale
 );
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,7 +38,7 @@ const productTimelineTranformer =
     let alpha = DEFAULT_ALPHA;
     const timelineData: TimelineDataPropItem[] =
       data.map((item) => {
-        const hasProduct = !!item.productUpdates.find(
+        const hasProduct = !!item.currentProductsUpdate.find(
           (product) => product.product === productTarget
         );
         if (hasProduct) {
@@ -44,19 +47,35 @@ const productTimelineTranformer =
           }
 
           return {
-            side: "nuetral",
+            side: "neutral",
             nodeOpacity: alpha,
           };
         } else {
           alpha = DEFAULT_ALPHA;
           return {
-            side: "nuetral",
+            side: "neutral",
             nodeOpacity: alpha,
           };
         }
       }) ?? [];
     return timelineData;
   };
+
+const PROFIT_VAL: Record<SentimentSide, number> = {
+  mixed: 0,
+  negative: -1,
+  neutral: 0,
+  positive: 1,
+};
+const getProfitabilitySide = (sides: SentimentSide[]): SentimentSide => {
+  const value = sides
+    ?.map((side) => PROFIT_VAL[side])
+    ?.reduce((prev, curr) => prev + curr, 0);
+
+  if (value === 0) return "neutral";
+  if (value === 1) return "positive";
+  return "negative";
+};
 
 export default function Home() {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -68,8 +87,6 @@ export default function Home() {
       const resData = await res.json();
       const stockTimeline = resData.results as StockData[];
       const closePrices = stockTimeline.map((stock) => stock.close);
-      // const highPrices = stockTimeline.map((stock) => stock.high);
-      // const lowPrices = stockTimeline.map((stock) => stock.low);
       const stockDates = stockTimeline.map((stock) =>
         dayjs(stock.date).format("MM/YY")
       );
@@ -95,20 +112,6 @@ export default function Home() {
                 tension: 0.1,
                 cubicInterpolationMode: "monotone",
               },
-              // {
-              //   data: highPrices,
-              //   label: "High",
-              //   borderColor: "#98d900",
-              //   tension: 0.1,
-              //   cubicInterpolationMode: "monotone",
-              // },
-              // {
-              //   data: lowPrices,
-              //   label: "Low",
-              //   borderColor: "#ff4e08",
-              //   tension: 0.1,
-              //   cubicInterpolationMode: "monotone",
-              // },
             ],
           },
         });
@@ -126,18 +129,18 @@ export default function Home() {
     f();
   }, []);
 
-  const revenueHightlights = useMemo(
+  const revenueHighlight = useMemo(
     () =>
       data?.map(
-        ({ revenueHightLight }) =>
+        ({ revenueHighlight }) =>
           ({
-            side: revenueHightLight.side,
+            side: revenueHighlight?.side,
             tooltip: (
               <Box>
                 <Text size="md" weight="bold">
                   Hightlight
                 </Text>
-                <Text size="md">{revenueHightLight.highlight}</Text>
+                <Text size="md">{revenueHighlight.value}</Text>
               </Box>
             ),
           } as TimelineDataPropItem)
@@ -148,20 +151,21 @@ export default function Home() {
   const profitabilities = useMemo(
     () =>
       data?.map(
-        ({ profitability: profitablity }) =>
+        ({ profitability }) =>
           ({
-            side: profitablity?.side,
+            side: getProfitabilitySide([profitability.freeCashFlows.side]),
             tooltip: (
               <Box>
                 <Text size="md" weight="bold">
                   Profitablity
                 </Text>
                 <Text size="md">
-                  GAAP Margin: {profitablity?.gaapAutomotiveGrossMargin}
+                  Free cash flows: {profitability?.freeCashFlows.value}
                 </Text>
                 <Text size="md">
-                  Operation Margin: {profitablity?.operationMargin}
+                  Operating income: {profitability?.operatingIncome.value}
                 </Text>
+                <Text size="md">Margins: {profitability?.margins.value}</Text>
               </Box>
             ),
           } as TimelineDataPropItem)
@@ -174,7 +178,7 @@ export default function Home() {
       Array.from(
         new Set(
           data?.flatMap((item) =>
-            item.productUpdates.map((update) => update.product)
+            item.currentProductsUpdate.map((update) => update.product)
           )
         )
       ),
@@ -193,7 +197,7 @@ export default function Home() {
   console.debug({ productTimelines });
 
   return (
-    <Box style={{ width: "100vw", padding: 0, ...inter.style }}>
+    <Box style={{ width: "100vw", padding: "20px", ...inter.style }}>
       <Text
         my={4}
         weight="bold"
@@ -216,8 +220,8 @@ export default function Home() {
           <Tabs.Panel value="fundamental" py="lg">
             <Text my={4}>Revenue Highlights</Text>
             <TimelineDots
-              keyPrefix="revenueHightlights"
-              items={revenueHightlights}
+              keyPrefix="revenueHighlight"
+              items={revenueHighlight}
             />
             <Text my={4}>Profitability</Text>
             <TimelineDots keyPrefix="profitability" items={profitabilities} />

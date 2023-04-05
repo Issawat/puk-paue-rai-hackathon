@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { SentimentSide } from "@/types/timelineData";
 
 const colorMap: Record<SentimentSide, string> = {
-  nuetral: "#e6e6e6",
+  neutral: "#e6e6e6",
   positive: "#98d900",
   negative: "#ff4e08",
   mixed: "#d68727",
@@ -31,7 +31,7 @@ export const TimelineDots = ({
   return (
     <Flex direction="row" align="center" justify="stretch" w="100%">
       {items?.map((item, index) => {
-        if (index >= items.length - 1) {
+        if (index === 0) {
           return (
             <Dot
               key={`${keyPrefix}-dot-${index}`}
@@ -50,18 +50,18 @@ export const TimelineDots = ({
             justify="stretch"
             w={`calc(${100 / (items.length - 1)}% - 5px)`}
           >
+            <Line
+              color={fixedColor ?? colorMap[item.side]}
+              width="calc(100% - 20px)"
+              opacity={
+                items[index - 1].nodeOpacity === 0 ? 0 : item.nodeOpacity
+              }
+            />
             <Dot
               color={fixedColor ?? colorMap[item.side]}
               dotSize={20}
               tooltip={item.tooltip}
               opacity={item.nodeOpacity}
-            />
-            <Line
-              color={fixedColor ?? colorMap[item.side]}
-              width="calc(100% - 20px)"
-              opacity={
-                items[index + 1].nodeOpacity === 0 ? 0 : item.nodeOpacity
-              }
             />
           </Flex>
         );

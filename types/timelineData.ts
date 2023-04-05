@@ -1,13 +1,22 @@
-export type SentimentSide = "positive" | "negative" | "nuetral" | "mixed";
+export type SentimentSide = "positive" | "negative" | "neutral" | "mixed";
 
 export type Profitablity = {
-  gaapAutomotiveGrossMargin: number;
-  operationMargin: number;
-  side: SentimentSide;
+  operatingIncome: {
+    value: "Doubled";
+    side: SentimentSide;
+  };
+  freeCashFlows: {
+    value: "Increased over 50%";
+    side: SentimentSide;
+  };
+  margins: {
+    value: "Industry-leading";
+    side: SentimentSide;
+  };
 };
 
 export type RevenueHightlight = {
-  highlight: string;
+  value: string;
   side: SentimentSide;
 };
 
@@ -22,8 +31,8 @@ export type Product = {
 
 export type TimlineData = {
   period: string;
-  revenueHightLight: RevenueHightlight;
+  revenueHighlight: RevenueHightlight;
   profitability: Profitablity;
-  productUpdates: Product[];
+  currentProductsUpdate: Product[];
   upcomingProductLaunches: Product[];
 };
